@@ -7,20 +7,27 @@ var config = require('./config');
 
 var T = new Twit(config);
 
+tweetIt();
+setInterval(tweetIt, 1000 * 60 * 5);
 
-var tweet = {
-    status: "@manali_joshee learning to automate the bot which will finally feel like a BOT...LOL"
+
+function tweetIt(){
+    var r = Math.floor(Math.random() * 100);
+
+    var tweet = {
+        status: "Here is a random number " + r + " @manali_joshee from node.js"
+    }
+    
+    T.post('statuses/update',  tweet, tweeted);
+    
+    function tweeted (err, data, response) {
+         if(err){
+             console.log("Something went wrong!" + err);
+         } else{
+             console.log("It worked!!!");
+         }
+    }
 }
 
-T.post('statuses/update',  tweet, tweeted);
-
-
-function tweeted (err, data, response) {
-     if(err){
-         console.log("Something went wrong!");
-     } else{
-         console.log("It worked!!!");
-     }
-}
   
   
