@@ -9,7 +9,7 @@ var T = new Twit(config);
 
 
 var tweet = {
-    status:"This is @manali_joshee learning how to build a twitter bot using node.js and loving every bit of it!!!"
+    status: "@manali_joshee learning to automate the bot which will finally feel like a BOT...LOL"
 }
 
 T.post('statuses/update',  tweet, tweeted);
