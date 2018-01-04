@@ -13,8 +13,8 @@ var params ={
     count : 20
 }
 
-//T.get('statuses/user_timeline', params, gotData);
-T.get('statuses/mentions_timeline', params, gotData);
+T.get('statuses/user_timeline', params, gotData);
+//T.get('statuses/mentions_timeline', params, gotData);
 
 
 
