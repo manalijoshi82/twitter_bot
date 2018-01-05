@@ -1,5 +1,4 @@
 
-
 console.log("The bot is starting II");
 
 var Twit = require ('twit');
@@ -15,22 +14,22 @@ var stream = T.stream('statuses/filter', { track: '#javascript' })
 var allTweets= [];
 stream.on('tweet', function (tweet) {
     if(tweet.retweeted == false){
-        //console.log(tweet.id_str);
-        allTweets.push(tweet.text);
+        console.log(tweet.id_str);
+        allTweets.push(tweet.id_str);
     }
 })
-    setInterval(tweetIt, 1000 * 60 * 20);
-    function tweetIt(){
-        var randomIndex = Math.round(Math.random() * allTweets.length);
-        //console.log(allTweets[randomIndex]);
-        T.post('statuses/retweet/:id', { id: 'allTweets[randomIndex]' }, function (err, tweet, response) {
-            if(err){
-                console.log(error);
-            }
-      
-            console.log(tweetIt.text);
-        });
-      
+setInterval(tweetIt, 1000 * 60 * 3);
+
+function tweetIt(){
+    var randomIndex = Math.round(Math.random() * allTweets.length);
+    console.log("selected tweet " +allTweets[randomIndex]);
+    T.post('statuses/retweet/:id', { id: allTweets[randomIndex] }, function (err, tweet, response) {
+        if(err){
+            console.log(err);
+        } else{
+            console.log("retweeting " + tweet.text + " whose id is " + tweet.id_str);
+        }
+    });    
   }
 
 
