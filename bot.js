@@ -21,47 +21,18 @@ setInterval(tweetIt, 1000 * 60 * 3);
 
 function tweetIt() {
 	var randomIndex = Math.floor(Math.random() * allTweets.length);
-	console.log('selected tweet ' + allTweets[randomIndex]);
-	T.post('statuses/retweet/:id', { id: allTweets[randomIndex] }, function(err, tweet, response) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('retweeting ' + tweet.text + ' whose id is ' + tweet.id_str);
-		}
-	});
+	if (allTweets.length > 0) {
+		console.log('selected tweet ' + allTweets[randomIndex]);
+		T.post('statuses/retweet/:id', { id: allTweets[randomIndex] }, function(err, tweet, response) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log('retweeting ' + tweet.text + ' whose id is ' + tweet.id_str);
+			}
+		});
+	} else {
+		console.log('Skipping this time - allTweets empty');
+	}
+
 	allTweets = [];
 }
-
-/*
-T.stream('statuses/filter', {track: ''}, function(stream) {
-    stream.on('data', function(tweet){
-        console.log(tweet.text);
-    });
-
-    stream.on('error', function(error){
-        console.log(error);
-    });
-});
-*/
-
-//T.get('geo/reverse_geocode', params, gotData);
-//T.get('statuses/mentions_timeline', params, gotData);
-
-/*
-function gotData(err, data, response) {
-    //var tweets = data.statuses;
-    for(var i = 0; i < data.length; i++){
-        console.log(data);
-    }
-       
-        /*
-        T.post('favorites/create', {id: data[i].id_str}, function(e,d,r){
-            if (e) {
-                console.log("Could not Like " +  e);
-            } else {
-                console.log("Liked " + d.id );
-            }
-        });
-        
-    }
-  */
