@@ -18,7 +18,7 @@ stream.on('tweet', function (tweet) {
         allTweets.push(tweet.id_str);
     }
 })
-setInterval(tweetIt, 1000 * 60 * 1);
+setInterval(tweetIt, 1000 * 60 * 3);
 
 function tweetIt(){
     var randomIndex = Math.round(Math.random() * allTweets.length);
