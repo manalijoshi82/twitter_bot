@@ -20,7 +20,7 @@ stream.on('tweet', function(tweet) {
 setInterval(tweetIt, 1000 * 60 * 3);
 
 function tweetIt() {
-	var randomIndex = Math.round(Math.random() * allTweets.length);
+	var randomIndex = Math.floor(Math.random() * allTweets.length);
 	console.log('selected tweet ' + allTweets[randomIndex]);
 	T.post('statuses/retweet/:id', { id: allTweets[randomIndex] }, function(err, tweet, response) {
 		if (err) {
