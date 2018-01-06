@@ -1,7 +1,6 @@
+console.log('The bot is starting II');
 
-console.log("The bot is starting II");
-
-var Twit = require ('twit');
+var Twit = require('twit');
 
 //importing config.js file
 var config = require('./config');
@@ -9,32 +8,29 @@ var config = require('./config');
 //make a new Twit object
 var T = new Twit(config);
 
-var stream = T.stream('statuses/filter', { track: '#javascript' })
+var stream = T.stream('statuses/filter', { track: '#javascript' });
 
-var allTweets= [];
-stream.on('tweet', function (tweet) {
-    if(tweet.retweeted == false){
-        console.log(tweet.id_str);
-        allTweets.push(tweet.id_str);
-    }
-})
+var allTweets = [];
+stream.on('tweet', function(tweet) {
+	if (tweet.retweeted == false) {
+		console.log(tweet.id_str);
+		allTweets.push(tweet.id_str);
+	}
+});
 setInterval(tweetIt, 1000 * 60 * 3);
 
-function tweetIt(){
-    var randomIndex = Math.round(Math.random() * allTweets.length);
-    console.log("selected tweet " +allTweets[randomIndex]);
-    T.post('statuses/retweet/:id', { id: allTweets[randomIndex] }, function (err, tweet, response) {
-        if(err){
-            console.log(err);
-        } else{
-            console.log("retweeting " + tweet.text + " whose id is " + tweet.id_str);
-        }
-    });    
-  }
-
-
-  
-
+function tweetIt() {
+	var randomIndex = Math.round(Math.random() * allTweets.length);
+	console.log('selected tweet ' + allTweets[randomIndex]);
+	T.post('statuses/retweet/:id', { id: allTweets[randomIndex] }, function(err, tweet, response) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('retweeting ' + tweet.text + ' whose id is ' + tweet.id_str);
+		}
+	});
+	allTweets = [];
+}
 
 /*
 T.stream('statuses/filter', {track: ''}, function(stream) {
@@ -47,7 +43,6 @@ T.stream('statuses/filter', {track: ''}, function(stream) {
     });
 });
 */
-
 
 //T.get('geo/reverse_geocode', params, gotData);
 //T.get('statuses/mentions_timeline', params, gotData);
